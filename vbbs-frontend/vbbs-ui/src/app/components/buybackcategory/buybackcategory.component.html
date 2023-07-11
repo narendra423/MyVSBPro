@@ -1,0 +1,95 @@
+<div class="bg-primary">
+  <p class="text-white p-1">Primary Category</p>
+</div>
+<form [formGroup]="primaryCategoryForm">
+  <div class="d-flex mt-2 ">
+    <div class="mr-4 ">
+      <label>Primary Category</label><br>
+      <select formControlName="primaryCategory" id="category" (change)="changeCategory($event.target)">
+        <option value="select">--select--</option>
+        <option *ngFor="let primaryCategory of primaryCategories" [value]="primaryCategory.name">
+          {{primaryCategory.name}}</option>
+      </select>
+    </div>
+    <div class="mr-4">
+      <label>Problem</label><br>
+      <select formControlName="problem" id="problem">
+        <option value="select">--select--</option>
+        <option *ngFor="let problem of problems" [value]="problem">{{problem}}</option>
+      </select>
+    </div>
+    <div>
+      <mat-label for="b" class="content-styles">Problem Description</mat-label><br>
+      <textarea name="words" id="b" cols="50" style="display: flex;" rows="2.5"
+        formControlName="problemDesc"></textarea>
+    </div>
+  </div>
+</form>
+
+<div class="bg-primary mt-4">
+  <p class="text-white p-1">Business Centre Information</p>
+</div>
+<!-- Business Centre -->
+<form [formGroup]="businessCentreForm" (ngSubmit)="categoryAndBusinessCentreSubmit()">
+  <div class="d-flex">
+    <div class="d-flex col-3 pl-0">
+      <mat-form-field appearance="fill">
+        <mat-label>Decision Maker ID </mat-label>
+        <input matInput formControlName="decisionMakerId" placeholder="Decision Makerid" required>
+      </mat-form-field>
+      <button mat-button (click)="getDecisionMaker()">
+        <i class="fa-solid fa-magnifying-glass search-button p-2 mt-2"></i>
+      </button>
+    </div>
+    <mat-form-field class="col-3" appearance="fill">
+      <mat-label>Decision Maker </mat-label>
+      <input matInput formControlName="decisionMaker" readonly="true" placeholder="Decision Maker" required>
+    </mat-form-field>
+    <mat-form-field class="col-3" appearance="fill">
+      <mat-label>Decision Maker Phone</mat-label>
+      <input matInput formControlName="phone" placeholder="Decision Maker Phone" required>
+    </mat-form-field>
+    <mat-form-field class="col-3" appearance="fill">
+      <mat-label>Decision Maker Email</mat-label>
+      <input matInput formControlName="emailId" placeholder="Decision Maker Email" required>
+    </mat-form-field>
+  </div>
+  <div class="d-flex">
+    <mat-form-field class="col-3 pl-0" appearance="fill">
+      <mat-label>Business Centre Identity</mat-label>
+      <!-- <input matInput formControlName="businessCentreIdentity" placeholder="Business Centre Identity" required> -->
+      <mat-select formControlName="businessCentreIdentity">
+        <mat-option value="1021">1021</mat-option>
+        <mat-option value="1022">1022</mat-option>
+        <mat-option value="1054">1054</mat-option>
+        <mat-option value="1056">1056</mat-option>
+      </mat-select>
+    </mat-form-field><br>
+    <mat-form-field class="col-3" appearance="fill">
+      <mat-label>District</mat-label>
+      <mat-select formControlName="district">
+        <mat-option value="TRZ">TRZ</mat-option>
+        <mat-option value="SLM">SLM</mat-option>
+        <mat-option value="ERO">ERO</mat-option>
+        <mat-option value="MAA">MAA</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="col-3">
+      <mat-label for="f" class="content-styles"><span class="star">*</span>In your opinion,did dealer
+        contribute/casue<br>
+        this buyback</mat-label><br>
+      <mat-button-toggle-group class="ml-1 mt-1" formControlName="isCauseForBuybackByDealer">
+        <mat-button-toggle (click)="toggleDealerOpinion()" value="Yes" class="toggle-button" name="dealeropinionToggle"
+          [ngClass]="{'blue' : !dealeropinionToggle, 'grey': dealeropinionToggle}">Yes
+        </mat-button-toggle>
+        <mat-button-toggle (click)="toggleDealerOpinion()" value="No" class="toggle-button" name="dealeropinionToggle"
+          [ngClass]="{'blue' : dealeropinionToggle, 'grey': !dealeropinionToggle}">No
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+  <div class="mt-2">
+    <button mat-button matStepperPrevious>Back</button>
+    <button type="submit" mat-button matStepperNext>Save & Next</button>
+  </div>
+</form>

@@ -1,0 +1,151 @@
+<app-header [enableCancelAndSubmitForApproval]="enableCancelAndSubmitForApproval" [enableSubmitAndApprove]="enableSubmitAndApprove" (searchInput)="resetSearch($event)"></app-header>
+<mat-stepper #stepper>
+  <!-- Vehicle & Customer -->
+  <mat-step [stepControl]="VehicleForm">
+
+    <ng-template matStepLabel>Vehicle Details</ng-template>
+    <div class="bg-primary">
+      <p class="text-white p-1">Search Criteria</p>
+    </div>
+    <form [formGroup]="VehicleForm" class="vin-bar">
+      <mat-form-field appearance="fill">
+        <mat-label>VIN</mat-label>
+        <input matInput id="vin" formControlName="VIN" placeholder="VIN" required />
+      </mat-form-field>
+      <div>
+        <button mat-button class="m-2" (click)="getVehicleDetails()">
+          Get Details <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+    </form>
+    <div class="bg-primary">
+      <p class="text-white p-1">Vechile Details</p>
+    </div>
+    <div class="example-container">
+      <form [formGroup]="vehicleDetails">
+        <mat-form-field appearance="fill">
+          <mat-label>VIN Number</mat-label>
+          <input matInput formControlName="vinNumber" readonly="true" placeholder="VIN Number" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Model Name</mat-label>
+          <input matInput formControlName="modelName" readonly="true" placeholder="Model Name" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Make</mat-label>
+          <input matInput formControlName="make" readonly="true" placeholder="Make" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Model Year</mat-label>
+          <input matInput formControlName="modelYear" readonly="true" placeholder="Model Year" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Current Mileage</mat-label>
+          <input matInput formControlName="currentMileage" readonly="true" placeholder="Current Mileage" required />
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="bg-primary">
+      <p class="text-white p-1">Customer Details</p>
+    </div>
+    <div class="example-container">
+      <form [formGroup]="customerDetails">
+        <mat-form-field appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" placeholder="First Name" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" placeholder="Last Name" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Email ID</mat-label>
+          <input matInput formControlName="emailId" placeholder="E-mail" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Best Time to Call</mat-label>
+          <input matInput formControlName="bestTimeToCall" placeholder="Best Time To Call" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Primary Phone #</mat-label>
+          <input matInput formControlName="phone1" placeholder="Primary Phone" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Alternate Phone #1</mat-label>
+          <input matInput formControlName="phone2" placeholder="Alternate Phone 1" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Alternate Phone #2</mat-label>
+          <input matInput formControlName="phone3" placeholder="Alternate Phone 1" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Contact Prefernce</mat-label>
+          <mat-select formControlName="contactPrefernce">
+            <mat-option value="phone">Phone</mat-option>
+            <mat-option value="mail">E-mail</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <mat-label class="content-styles mb-0"><span class="star">*</span>Is customer is on Rental?</mat-label><br />
+          <mat-button-toggle-group class="toggle-group ml-1 mt-1" formControlName="rental">
+            <mat-button-toggle (click)="toggleArbitration()" class="toggle-button" value="true"
+              [ngClass]="{ blue: arbitrationToggle, grey: !arbitrationToggle }">Yes</mat-button-toggle>
+            <mat-button-toggle (click)="toggleArbitration()" class="toggle-button" value="false"
+              [ngClass]="{ blue: !arbitrationToggle, grey: arbitrationToggle }">No</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </form>
+    </div>
+
+    <div>
+      <button [disabled]="customerDetails.invalid" mat-button matStepperNext (click)="section1()">
+        Save & Next
+      </button>
+    </div>
+  </mat-step>
+
+  <!-- Buyback section -->
+  <mat-step>
+    <ng-template matStepLabel>Buyback Details</ng-template>
+    <app-buybackdetails (enableCancelAndSubmitForApproval)="toggleCancelAndSubmitForApproval($event)" (showBuybackReason)="toggleBuybackReason($event)" *ngIf="showBuyBackDetail" [vehicleInfo]="vehicleInfo"></app-buybackdetails>
+  </mat-step>
+
+  <!-- BuyBack Reason Section  -->
+  <mat-step>
+    <ng-template matStepLabel>Buyback Reason </ng-template>
+    <app-buybackreason (showBuybackCategory)="toggleBuybackCategory($event)" *ngIf="showBuybackReason" [buybackFromDB]="vehicleInfo.buyback"></app-buybackreason>
+  </mat-step>
+
+  <!-- BuybackCategory  Section-->
+  <mat-step >
+      <ng-template matStepLabel>Buyback Category</ng-template>
+      <app-buybackcategory (enableSubmitAndApprove)="toggleSubmitAndApprove($event)" (showAttachement)="toggleAttachment($event)" *ngIf="showBuybackCategory" [buybackFromDB]="vehicleInfo.buyback"></app-buybackcategory>
+  </mat-step>
+
+  <!-- Attachment -->
+
+  <mat-step>
+    <ng-template matStepLabel>Attachment </ng-template>
+    <app-attachment *ngIf="showAttachement" [vehicleInfo]="vehicleInfo"></app-attachment>
+  </mat-step>
+
+  <!-- <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button>Reset</button>
+    </div>
+  </mat-step> -->
+</mat-stepper>

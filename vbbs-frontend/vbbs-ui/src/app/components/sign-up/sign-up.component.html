@@ -1,0 +1,77 @@
+<mat-card>
+    <mat-card-title class= "text-center"style="color:black; font-weight: bold; font-size: 30px;" >Registration</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="registrationForm"  autocomplete="off">
+        <div>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>FirstName</mat-label>
+                <input formControlName="firstName" matInput [type]="'firstName'" required />
+                <mat-error *ngIf="!registrationForm.controls['firstName'].valid">
+                    FirstName is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+  
+        <div>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>LastName</mat-label>
+                <input formControlName="lastName" matInput [type]="'lastName'" required />
+                <mat-error *ngIf="!registrationForm.controls['lastName'].valid">
+                    LastName is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>MiddleInitial</mat-label>
+                <input formControlName="middleInitial" matInput [type]="'middleInitial'" required />
+                <mat-error *ngIf="!registrationForm.controls['middleInitial'].valid">
+                    MiddleInitial is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>EmailId</mat-label>
+                <input formControlName="emailId" matInput [type]="'emailId'" required />
+                <mat-error *ngIf="!registrationForm.controls['emailId'].valid">
+                    EmailId is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Password</mat-label>
+                <input formControlName="password" matInput [type]="'password'" required />
+                <mat-error *ngIf="!registrationForm.controls['password'].valid">
+                    Password is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+         <div>
+          <mat-form-field class="full-width" appearance="outline">
+              <mat-label>RoleType</mat-label>
+              <mat-select required  formControlName="roles">
+                  <mat-option *ngFor="let role of roles" [value]="role.roleId" >
+                    {{role.userRole}}
+                  </mat-option>
+                </mat-select>
+             
+          </mat-form-field>
+      </div>
+       
+        <div class="d-flex flex-row justify-content-between">
+            <div>
+              <button type="submit" [disabled]="registrationForm.invalid" class="btn btn-primary" (click)="onSubmit()">SignUp</button>
+            </div>
+            <div>
+              <button class="btn btn-primary" routerLink = "/login">Cancel</button>
+            </div>
+          </div>
+      </form> 
+   </mat-card-content>
+  </mat-card>

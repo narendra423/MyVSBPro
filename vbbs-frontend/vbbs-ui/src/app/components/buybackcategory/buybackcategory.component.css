@@ -1,0 +1,98 @@
+.mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }
+
+  .example-container .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+  .vin-bar{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    
+  }
+
+  .mat-button-toggle-group {
+    margin-left: 12px;
+  }
+  .search-symbol {
+  padding: 10px;
+  background-color:bisque;
+}
+.card{
+  display: flex;
+  flex-direction: row;
+}
+.star{
+  color: red;
+}
+.content-styles{
+  font-size: 12px;
+}
+.dropdown-styles{
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, 0.24);
+  width: 170px;
+  font-size: 12px;
+}
+
+.yes-no-button{
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightgrey;
+  font-size: 11px;
+  border-radius: 3px;
+  color: white;
+  border: none;
+  padding: 4px;
+  
+}
+.blue {
+  background-color: #1d7ccf;
+  color: white;
+}
+
+.grey {
+  background-color: white;
+  color: grey;
+}
+
+.toggle-group{
+  height: 28px;
+  padding: 0px;
+}
+
+.toggle-button{
+  width: 38px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 5px;
+}
+.m-1{
+  background-color:#1d7ccf;
+  width: 10px;
+}
+.cust{
+ width: 100px;
+ height: 50px;
+
+}
+
+.search-button{
+  background-color: #1d7ccf;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  cursor: pointer;
+  border-radius: 2px;
+}
+

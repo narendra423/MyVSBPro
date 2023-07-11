@@ -1,0 +1,25 @@
+<form [formGroup]="attachment" enctype="multipart/form-data">
+  <h3 class="heading">Attachments</h3>
+  <button (click)="uploadFilesToDb()" [disabled]="!enableAdd" [class.attach-button]="!enableAdd"
+    class="attach-button bg-primary text-white border cursor:pointer small rounded m-1">
+    + Add</button><br />
+  <div>
+    <input type="file" formControlName="file" (change)="onFileSelected($event)">
+  </div>
+  <div class="mt-3" *ngIf="myFiles.length>0">
+    <div *ngFor="let item of myFiles">
+      <div class="d-flex">
+        {{item.fileName}}
+        <button (click)="deleteClicked(item)" class="delete-button ml-2">x</button>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="mt-3">
+  <h3 class="heading">Logs</h3>
+  <p *ngIf="vehicleInfo.buyback.buybackStatus === 'APPROVALPENDING'">Buyback created and pending for approval</p>
+  <p *ngIf="vehicleInfo.buyback.buybackStatus === 'APPROVED'">Buyback approved</p>
+</div>
+<div class="mt-3">
+  <button mat-button matStepperPrevious>Back</button>
+</div>

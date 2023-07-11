@@ -1,0 +1,48 @@
+<mat-card>
+    <mat-card-title class= "text-center"style="color:black; font-weight: bold; font-size: 30px;" >Login</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="userloginForm" (ngSubmit)="onSubmit()" autocomplete="off">
+        <div>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input formControlName="emailId" matInput [type]="'email'" />
+                <!-- <mat-error *ngIf="userloginForm.controls['emailId'].hasError('required') && userloginForm.controls['email'].dirty">
+                    EmailId is required
+                </mat-error> -->
+            </mat-form-field>
+        </div>
+  
+        <div>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Password</mat-label>
+                <input formControlName="password" matInput [type]="'password'" />
+                <mat-error *ngIf="(userloginForm.controls['password'].hasError('minlength') || userloginForm.controls['password'].hasError('required')) && userloginForm.controls['password'].dirty">
+                  <span *ngIf="userloginForm.controls['password'].hasError('required')">Password is required</span>  
+                  <span *ngIf="userloginForm.controls['password'].hasError('minlength')">Password too short</span> 
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <!-- <div>
+          <mat-form-field class="full-width" appearance="outline">
+              <mat-label>RoleType</mat-label>
+              <mat-select>
+                  <mat-option *ngFor="let role of roles" [value]="role.value">
+                    {{role.viewValue}}
+                  </mat-option>
+                </mat-select>
+             
+          </mat-form-field>
+      </div> -->
+        <div class="d-flex flex-row justify-content-between">
+          <div>
+            <button type="submit" [disabled]="userloginForm.invalid" class="btn btn-primary">Login</button>
+          </div>
+          <div>
+            <button matTooltip="Don't have an account?" class="btn btn-primary" routerLink="/signup" >Register</button>
+          </div>
+        </div>
+       
+      </form> 
+   </mat-card-content>
+  </mat-card>

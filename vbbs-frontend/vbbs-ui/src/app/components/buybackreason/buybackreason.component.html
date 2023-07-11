@@ -1,0 +1,116 @@
+<form [formGroup]="buybackReasonForm" (ngSubmit)="buybackReasonFormSubmit()">
+    <ng-template matStepLabel>Buyback</ng-template>
+
+
+    <div class="mat-card pb-2">
+        <h3 class="heading">Buyback Reason</h3>
+        <!-- ------nonconfirmity------- -->
+        <div class="p-1 pl-3 pb-2">
+            <mat-label for="b" class="content-styles mb-0"><span class="star">*</span>What was the nonconfirmity that
+                resulted
+                in the buyback in the customer's words?</mat-label><br>
+            <textarea name="words" id="b" cols="100" style="display: flex;" rows="1.5"
+                formControlName="nonConfirmity"></textarea>
+        </div>
+        <!-- repaired -->
+        <div class="d-flex mt-2 pb-2">
+            <div class="p-1 pl-3">
+                <mat-label class="content-styles mb-0"><span class="star">*</span>Has the reason for Buyback been
+                    repaired?
+                </mat-label><br>
+                <mat-button-toggle-group class="ml-1 mt-1" formControlName="isBuybackReasonRepaired">
+                    <mat-button-toggle (click)="toggleBuybackRepaired()" value=true class="toggle-button"
+                        name="isBuybackReasonRepaired"
+                        [ngClass]="{'blue' : !buybackRepairedToggle, 'grey': buybackRepairedToggle}">Yes
+                    </mat-button-toggle>
+                    <mat-button-toggle (click)="toggleBuybackRepaired()" value=false class="toggle-button"
+                        name="isBuybackReasonRepaired"
+                        [ngClass]="{'blue' : buybackRepairedToggle, 'grey': !buybackRepairedToggle}">
+                        No</mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
+            <div class="ml-5" [hidden]="showHideRepairedReason">
+                <mat-label for="a" class="content-styles">Please explain why not</mat-label><br>
+                <textarea name="explain" id="a" cols="32" rows="2" formControlName="reasonForNotRepaired"></textarea>
+            </div>
+        </div>
+
+        <!-- physical damage -->
+        <div class="p-1 pl-3 pb-2">
+            <mat-label class="content-styles mb-0"><span class="star">*</span>Is there any physical damage to the
+                vehicle?</mat-label><br>
+            <mat-button-toggle-group class="ml-1 mt-1" formControlName="anyPhysicalDamage">
+                <mat-button-toggle (click)="togglePhysicalDamage()" value=true class="toggle-button"
+                    name="physicaldamage" [ngClass]="{'blue' : !physicaldamage, 'grey': physicaldamage}">Yes
+                </mat-button-toggle>
+                <mat-button-toggle (click)="togglePhysicalDamage()" value=false class="toggle-button"
+                    name="physicaldamage" [ngClass]="{'blue' : physicaldamage, 'grey': !physicaldamage}">No
+                </mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+        <!-- isindealership -->
+        <div class="p-1 pl-3 mr-5 pb-2">
+            <mat-label class="content-styles mb-0"><span class="star">*</span>Is the vehicle currently at the
+                dealership?
+            </mat-label><br>
+            <mat-button-toggle-group class="ml-1 mt-1" formControlName="vehicleInDealership">
+                <mat-button-toggle (click)="toggleVehicleInDealer()" value=true class="toggle-button"
+                    name="vehicleindealer" [ngClass]="{'blue' : !vehicleindealer, 'grey': vehicleindealer}">Yes
+                </mat-button-toggle>
+                <mat-button-toggle (click)="toggleVehicleInDealer()" value=false class="toggle-button"
+                    name="vehicleindealer" [ngClass]="{'blue' : vehicleindealer, 'grey': !vehicleindealer}">No
+                </mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+        <!-- justification and additional-->
+        <div class="pl-3 d-flex mt-2 pb-2">
+            <div class="mr-5">
+                <mat-label for="c" class="content-styles"><span class="star">*</span>Justification for
+                    Buyback(eg:Days out
+                    of<br>
+                    service,# of Warranty,etc.,)</mat-label><br>
+
+                <textarea name="justify" id="c" cols="30" rows="2" formControlName="justification"></textarea>
+
+            </div>
+            <div>
+                <mat-label for="d" class="content-styles">Please provide additional information about <br>
+                    the terms of this Buyback not identified above</mat-label><br>
+
+                <textarea name="addionalinfo" id="d" cols="32" rows="2" formControlName="additionalInfo"></textarea>
+            </div>
+
+        </div>
+        <!---Dealership details-->
+        <form [formGroup]="dealerDetailsForm" class="mt-2" [hidden]="!showDealerDetails">
+            <h3 class="heading">Dealer Deatils</h3>
+            <div class="d-flex">
+                <mat-form-field appearance="fill" class="pr-1">
+                    <mat-label class="content-styles">Dealer Code</mat-label>
+                    <input matInput formControlName="code" required>
+                </mat-form-field>
+                <div class="search-button mr-2">
+                    <button mat-button class="m-2" style="outline: none;" (click)="getDealerDetails()">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                <mat-form-field appearance="fill" class="pr-1">
+                    <mat-label class="content-styles">Dealership Name</mat-label>
+                    <input matInput formControlName="dealershipName">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="pr-1">
+                    <mat-label class="content-styles">Dealer Email</mat-label>
+                    <input matInput formControlName="emailId">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label class="content-styles">Dealer Contact</mat-label>
+                    <input matInput formControlName="contact" required>
+                </mat-form-field>
+            </div>
+        </form>
+        <div class="mt-2">
+            <button mat-button matStepperPrevious>Back</button>
+            <button type="submit" mat-button matStepperNext>Save & Next</button>
+        </div>
+    </div>
+</form>

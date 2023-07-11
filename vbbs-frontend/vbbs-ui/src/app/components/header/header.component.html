@@ -1,0 +1,20 @@
+<div class="container-fluid ml-2 mt-3 mb-0">
+    <div class="row d-flex flex-row justify-content-between ">
+        <div class="col-4">
+            <h2 class="vehicle-heading">Vehicle Buyback <span class="template-heading">Template</span></h2>
+        </div>
+        <div class="col-8 d-flex flex-row justify-content-end">
+            <button [disabled]="!enableCancelAndSubmitForApproval" (click)="onClickSubmitForApproval()" class=" button"><span class="mr-2"><i class="fa-solid fa-check"></i></span>Submit for
+                Approval</button>
+            <button [disabled]="!enableSubmitAndApprove" (click)="onClickSubmitAndApprove()" class=" button"><span class="mr-2"><i class="fa-solid fa-check"></i></span>Submit And
+                Approve</button>
+            <button [disabled]="!enableCancelAndSubmitForApproval" (click)="onClickCancel()" class=" button"><span class="mr-2"><i class="fa-solid fa-xmark"></i></span>Cancel /
+                withdraw</button>
+            <button (click)="onClickClearSearch()" class=" button"><span class="mr-2"><i class="fa-solid fa-arrows-rotate"></i></span>Clear
+                Search</button>
+            <button (click)="onClickClearAll()" class=" button"><span class="mr-2"><i class="fa-solid fa-arrows-rotate"></i></span>Clear
+                All</button>
+            <button (click)="onClickLogout()" class=" button"><span class="mr-2"><i class="fa fa-sign-out"></i></span>Log out</button>
+        </div>
+    </div>
+</div>
